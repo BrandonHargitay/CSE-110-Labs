@@ -81,6 +81,18 @@ nav ul li a, .section p {
     height: auto;
 }
 
+#subscribe-section {
+    background-image: url('https://www.ucsd.edu/_resources/img/bg-orbs-1.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    display: inline-block;
+    width: 100%;
+    scroll-margin-top: 50px;
+    padding: 20px;
+}
+
+
 @media screen and (max-width: 800px) {
     nav ul {
         display: none;
