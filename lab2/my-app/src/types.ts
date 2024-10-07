@@ -1,4 +1,9 @@
-export type Label = "work" | "personal" | "study";
+export enum Label {
+  personal = "personal",
+  study = "study",
+  work = "work",
+  other = "other"
+}
 
 export interface Note {
     id: number;
