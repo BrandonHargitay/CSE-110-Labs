@@ -1,37 +1,29 @@
+import React, { useState } from 'react';
 import './App.css';
-import { Label, Note } from "./types"; // Import the Label type from the appropriate module
-import { dummyNotesList } from "./constants"; // Import the dummyNotesList from the appropriate module
-import ClickCounter from './hooksExercise'; // Import the ClickCounter component
+import { ThemeContext, themes, Theme } from "./context/ThemeContext";
+import NoteForm from './components/NoteForm';
+import NoteList from './components/NoteList';
+import FavoritesList from './components/FavoritesList';
+import { useNotes } from './hooks/useNotes';
 
 function App() {
- return (
-   <div className='app-container'>
-    <form className="note-form">
-       <div><input placeholder="Note Title"></input></div>
+  const [theme, setTheme] = useState<Theme>(themes.light);
+  const { notes, favorites, toggleFavorite } = useNotes();
 
-       <div><textarea></textarea></div>
+  const toggleTheme = () => {
+    setTheme((prevTheme: Theme) => prevTheme === themes.light ? themes.dark : themes.light);
+  };
 
-       <div><button type="submit">Create Note</button></div>
-    </form> 
-    <div className="notes-grid">
-       {dummyNotesList.map((note) => (
-         <div
-           key={note.id}
-           className="note-item">
-           <div className="notes-header">
-             <button>x</button>
-           </div>
-           <h2> {note.title} </h2>
-           <p> {note.content} </p>
-           <p> {note.label} </p>
-         </div>
-       ))}
-     </div>
-     
-     {/* Add the ClickCounter component here */}
-     <ClickCounter />
-   </div>
- );
+  return (
+    <ThemeContext.Provider value={theme}>
+      <div className='app-container' style={{ background: theme.background, color: theme.foreground }}>
+        <button onClick={toggleTheme}>Toggle Theme</button>
+        <NoteForm />
+        <NoteList notes={notes} onToggleFavorite={toggleFavorite} />
+        <FavoritesList favorites={favorites} />
+      </div>
+    </ThemeContext.Provider>
+  );
 }
 
 export default App;

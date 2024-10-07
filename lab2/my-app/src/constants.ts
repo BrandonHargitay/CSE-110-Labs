@@ -1,40 +1,39 @@
-import { Label } from './types'; // Add this import at the top of the file
+import { Label, Note } from './types'; // Import both Label and Note
 
-export const dummyNotesList = [
+export const dummyNotesList: Note[] = [
     {
         id: 1,
-        title: "test note 1 title",
-        content: "test note 1 content",
-        label: Label.other,
+        title: "Meeting Notes",
+        content: "Discuss project timeline",
+        label: "work",
+        isFavorite: false
     },
     {
         id: 2,
-        title: "test note 2 title",
-        content: "test note 2 content",
-        label: Label.personal,
+        title: "Shopping List",
+        content: "Milk, eggs, bread",
+        label: "personal",
+        isFavorite: false
     },
     {
         id: 3,
-        title: "test note 3 title",
-        content: "test note 3 content",
-        label: Label.work,
+        title: "Study Plan",
+        content: "Review chapter 5",
+        label: "study",
+        isFavorite: false
     },
     {
-        id: 4,
-        title: "test note 4 title",
-        content: "test note 4 content",
-        label: Label.study,
+        id: 3,
+        title: "Study Plan",
+        content: "Review chapter 5",
+        label: "study",
+        isFavorite: false
     },
     {
-        id: 5,
-        title: "test note 5 title",
-        content: "test note 5 content",
-        label: Label.study,
-    },
-    {
-        id: 6,
-        title: "test note 6 title",
-        content: "test note 6 content",
-        label: Label.personal,
-    },
- ]
+        id: 3,
+        title: "Study Plan",
+        content: "Review chapter 5",
+        label: "study",
+        isFavorite: false
+    }
+];

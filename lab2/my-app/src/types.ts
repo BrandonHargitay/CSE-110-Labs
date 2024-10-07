@@ -1,13 +1,9 @@
-export enum Label {
-    personal = "personal",
-    study = "study",
-    work = "work",
-    other = "other",
- }
- 
- export type Note = {
+export type Label = "work" | "personal" | "study";
+
+export interface Note {
     id: number;
     title: string;
     content: string;
     label: Label;
- };
+    isFavorite: boolean;  // Add this line
+}
