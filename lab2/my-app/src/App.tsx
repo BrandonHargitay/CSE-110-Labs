@@ -1,6 +1,7 @@
 import './App.css';
 import { Label, Note } from "./types"; // Import the Label type from the appropriate module
 import { dummyNotesList } from "./constants"; // Import the dummyNotesList from the appropriate module
+import ClickCounter from './hooksExercise'; // Import the ClickCounter component
 
 function App() {
  return (
@@ -11,7 +12,7 @@ function App() {
        <div><textarea></textarea></div>
 
        <div><button type="submit">Create Note</button></div>
-</form> 
+    </form> 
     <div className="notes-grid">
        {dummyNotesList.map((note) => (
          <div
@@ -26,8 +27,10 @@ function App() {
          </div>
        ))}
      </div>
+     
+     {/* Add the ClickCounter component here */}
+     <ClickCounter />
    </div>
-
  );
 }
 
