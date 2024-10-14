@@ -10,8 +10,9 @@ const App = () => {
      <Navbar />
      <Routes>
        <Route path="/" element={<StickyNotes />} />
-       <Route path="/todolist" element={<ToDoList />} />
-     </Routes>
+       <Route path="/todolist/:name" element={<ToDoList />} />
+
+</Routes>
    </div>
  );
 };
