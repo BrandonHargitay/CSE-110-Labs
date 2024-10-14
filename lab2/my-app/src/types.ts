@@ -12,3 +12,5 @@ export interface Note {
     label: Label;
     isFavorite: boolean;  // Add this line
 }
+
+export type GroceryItem = { name: string; isPurchased: boolean };
