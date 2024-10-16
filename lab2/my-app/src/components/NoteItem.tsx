@@ -49,9 +49,10 @@ const NoteItem: React.FC<NoteItemProps> = ({
       className={`note-item ${isSelected ? 'selected' : ''}`}
       style={{ background: theme.background, color: theme.foreground }}
       onClick={() => onNoteSelect(note)}
+      data-testid={`note-item-${note.id}`}
     >
       <div className="notes-header">
-        <button onClick={handleDelete}>x</button>
+        <button onClick={handleDelete} data-testid={`delete-note-${note.id}`}>x</button>
         <button
           onClick={(e) => {
             e.stopPropagation();
@@ -66,6 +67,7 @@ const NoteItem: React.FC<NoteItemProps> = ({
         contentEditable={isSelected}
         onBlur={(e) => handleContentEdit(e, 'title')}
         suppressContentEditableWarning={true}
+        data-testid={`note-title-${note.id}`}
       >
         {note.title}
       </h2>
@@ -73,6 +75,7 @@ const NoteItem: React.FC<NoteItemProps> = ({
         contentEditable={isSelected}
         onBlur={(e) => handleContentEdit(e, 'content')}
         suppressContentEditableWarning={true}
+        data-testid={`note-content-${note.id}`}
       >
         {note.content}
       </div>
@@ -86,7 +89,7 @@ const NoteItem: React.FC<NoteItemProps> = ({
       ) : (
         <p>{note.label}</p>
       )}
-      {isSelected && <button onClick={handleUpdate}>Update</button>}
+      {isSelected && <button onClick={handleUpdate} data-testid={`update-note-${note.id}`}>Update</button>}
     </div>
   );
 };

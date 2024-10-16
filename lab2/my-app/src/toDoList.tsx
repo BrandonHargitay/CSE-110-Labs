@@ -5,8 +5,6 @@ import { GroceryItem } from "./types";
 import { dummyGroceryList } from "./constants";
 import { useParams } from "react-router-dom";
 
-
-
 export function ToDoList() {
  const [numRemainingItems, setNumRemainingItems] = useState(0);
  const { name } = useParams();
@@ -15,31 +13,29 @@ export function ToDoList() {
 
  function handleCheckboxClick(e: React.ChangeEvent<HTMLInputElement>) {
    const checkbox: HTMLInputElement = e.target as HTMLInputElement;
-
    const itemName = checkbox.name;
 
-   const itemIndex = items.findIndex((item) => item.name === itemName);
-   items[itemIndex] = { name: itemName, isPurchased: checkbox.checked };
+   setItems(prevItems => {
+     const updatedItems = prevItems.map(item =>
+       item.name === itemName ? { ...item, isPurchased: checkbox.checked } : item
+     );
 
-   const uncheckedItems = items.filter((item) => !item.isPurchased);
-   const checkedItems = items.filter((item) => item.isPurchased);
+     const uncheckedItems = updatedItems.filter(item => !item.isPurchased);
+     const checkedItems = updatedItems.filter(item => item.isPurchased);
 
-   const newItems = uncheckedItems.concat(checkedItems);
+     return [...uncheckedItems, ...checkedItems];
+   });
 
-   setItems(newItems);
-
-   const diff = checkbox.checked ? 1 : -1;
-
-   setNumRemainingItems(numRemainingItems + diff);
+   setNumRemainingItems(prev => checkbox.checked ? prev + 1 : prev - 1);
  }
 
  return (
   <>
-    <h1>{name}'s To Do List</h1>
+    <h1 data-testid="todo-list-title">{name}'s To Do List</h1>
     <div className="App">
       <div className="App-body">
-        Items bought: {numRemainingItems}
-        <form action=".">
+        <p data-testid="items-bought-count">Items bought: {numRemainingItems}</p>
+        <form action="." data-testid="todo-list-form">
           {items.map((item) => ListItem(item, handleCheckboxClick))}
         </form>
       </div>
@@ -50,15 +46,15 @@ export function ToDoList() {
 
 function ListItem(item: GroceryItem, changeHandler: ChangeEventHandler) {
  return (
-   <div>
+   <div key={item.name} data-testid={`todo-item-${item.name}`}>
      <input
        type="checkbox"
        onChange={changeHandler}
        checked={item.isPurchased}
        name={item.name}
+       data-testid={`todo-checkbox-${item.name}`}
      />
      {item.name}
    </div>
  );
 }
-

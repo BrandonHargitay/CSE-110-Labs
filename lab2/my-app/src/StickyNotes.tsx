@@ -63,7 +63,7 @@ export const StickyNotes = () => {
 
   return (
     <>
-      <form className="note-form" onSubmit={createNoteHandler}>
+      <form className="note-form" onSubmit={createNoteHandler} data-testid="create-note-form">
         <div>
           <input
             placeholder="Note Title"
@@ -71,6 +71,7 @@ export const StickyNotes = () => {
             onChange={(event) =>
               setCreateNote({ ...createNote, title: event.target.value })}
             required
+            data-testid="note-title-input"
           />
         </div>
 
@@ -81,6 +82,7 @@ export const StickyNotes = () => {
             onChange={(event) =>
               setCreateNote({ ...createNote, content: event.target.value })}
             required
+            data-testid="note-content-input"
           />
         </div>
 
@@ -98,7 +100,7 @@ export const StickyNotes = () => {
           </select>
         </div>
 
-        <div><button type="submit">Create Note</button></div>
+        <div><button type="submit" data-testid="create-note-button">Create Note</button></div>
       </form>
 
       <NoteList 
